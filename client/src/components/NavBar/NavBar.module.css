@@ -1,0 +1,18 @@
+.contenedor{
+    display: flex;
+    width: auto;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgb(62, 47, 147);
+    box-shadow: 0 0 10px rgb(9, 4, 78), 0 0 40px rgb(23, 5, 124), 0 0 80px rgb(66, 51, 236);
+    padding: 5px;
+    margin: 0px 20px 10px auto;
+}
+
+.logo{
+    display: flex;
+    width: auto;
+    position: relative;
+    height: 90px;
+
+}

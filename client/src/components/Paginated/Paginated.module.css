@@ -1,0 +1,30 @@
+nav {
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .page {
+    margin: 0 5px;
+    background-color: #eaeaea; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 4px; /* Borde redondeado */
+  padding: 8px 12px; /* Espaciado interno */
+  }
+  
+  .page button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .page button:hover {
+    background-color: #2d0cbd; /* Color de fondo al pasar el cursor */
+  }
