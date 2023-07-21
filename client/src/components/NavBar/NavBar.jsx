@@ -8,13 +8,13 @@ import logoPoke from '../Image/LogoPokemon.png'
 
 export default function Nav (props) {
 
-    const { onSearch} = props;
+    const { handleSubmit} = props;
     
     return (
 
         <div className={style.contenedor}>
             <img className={style.logo} src={logoPoke} alt=""/>
-            <SearchBar onSearch = {onSearch} />
+            <SearchBar onClick = {handleSubmit} />
         </div>
         
     )

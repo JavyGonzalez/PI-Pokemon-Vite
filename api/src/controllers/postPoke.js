@@ -10,7 +10,7 @@ const postPoke = async (req, res) =>{
         const {name, img, hp, attack, defense, speed, height, weight, type } = req.body;
 
         //Pregunto si falta algun dato
-        if(!name || ! img || !hp || !attack || !defense || !speed || !speed || !height || !weight || !type){
+        if(!name || ! img || !hp || !attack || !defense || !type){
             return res.status(401).send('Faltan datos');
         }
 

@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import NavBar from '../NavBar/NavBar'
-import { getPokemons, orderPokeByName, orderPokeByAttack, filterPokemonsByType, getTypes, filterCreated, getPokeByName } from "../../redux/actions";
+import { getPokemons, 
+    orderPokeByName, 
+    orderPokeByAttack, 
+    filterPokemonsByType, 
+    getTypes, 
+    filterCreated, 
+    getPokeByName } from "../../redux/actions";
 //import {Link} from 'react-router-dom';
 import Card from '../Card/Card';
 import Paginated from "../Paginated/Paginated";
-import style from '../Home/Home.module.css'
+import style from '../Home/Home.module.css';
+import { Link } from "react-router-dom";
+import PathRoutes from "../../helpers/Routes.helper";
 
 
 
@@ -21,8 +29,6 @@ export default function Home (){
     const [pokePerPage, setPokePerPage] = useState(12);
     
 
-
-
     const [sortPoke, setSortPoke] = useState(false);
     //El índice del ultimo Pokemon por página.
     const indexOfLastPokemon = currentPage * pokePerPage;
@@ -30,15 +36,16 @@ export default function Home (){
     const indexOfFirstPokemon = indexOfLastPokemon - pokePerPage;
     //Se va guardando los poekemones por pagina
    // const currentPoke = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
-   const currentPoke = Array.isArray(allPokemons) ? allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) : [];
+   const currentPoke = Array.isArray(allPokemons) 
+   ? allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) 
+   :[allPokemons];
 
     const types = useSelector(state => state.types)
     
     
     useEffect(()=>{
         dispatch(getTypes());
-        dispatch(getPokemons()); 
-        dispatch(getPokeByName())//Igual que hacer mapDispatchToProps
+        dispatch(getPokemons()); //Igual que hacer mapDispatchToProps
 
     }, [dispatch])//Si no funciona borrar dispatch del arreglo
 
@@ -69,12 +76,12 @@ export default function Home (){
     function handleFilterCreated(e){
         dispatch(filterCreated(e.target.value))
     }
-      
 
+      
     return(
         <div>
-            <NavBar/>            
-            <button>Crear Pokemon</button>
+            <NavBar/>
+            <Link to={PathRoutes.CREATEPOKE}><button>Crear Pokemon</button></Link>            
             <h1>POKEMONES</h1>
             <button onClick={ev => handleClick(ev)}>
                 Volver a cargar todos los Pokemones
@@ -103,21 +110,20 @@ export default function Home (){
                     <option value='created'>Creados</option>
                     <option value='api'>API</option>
                 </select>
-
                 <Paginated className={style.contenedor}
                     pokePerPage={pokePerPage}
                     allPokemons={allPokemons.length}
                     paginado={paginado}
                 />
-
+       
                 {currentPoke?.map((p)=>{
                     return(
-                        <div key={p.id}>
-                            <p to={'/home/' + p.id}>
-                                <Card name={p.name} img={p.img} types={p.types.join(' - ')} />
-                            </p>
-                        </div>
-                    );
+                            <div key={p.id}>
+                                <p to={'/home' + p.id}>
+                                    <Card name={p.name} img={p.img} types={p.types.join(' - ')} />
+                                </p>
+                            </div>
+                        );
                     })
                 }
 

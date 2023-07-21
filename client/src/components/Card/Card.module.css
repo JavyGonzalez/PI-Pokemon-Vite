@@ -1,0 +1,33 @@
+/* Estilos generales para la card */
+.pokemonCard {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para el nombre del Pokémon */
+  .pokemonName {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  
+  /* Estilos para el tipo del Pokémon */
+  .pokemonTypes {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+  }
+  
+  /* Estilos para la imagen del Pokémon */
+  .pokemonImg {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+
+  

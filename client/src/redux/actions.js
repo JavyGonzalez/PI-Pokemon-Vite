@@ -8,6 +8,7 @@ export const GET_TYPES ='GET_TYPES';
 export const FILTER_BY_TYPES = 'FILTER_BY_TYPES';
 export const FILTERED_POKEMONS = 'FILTERED_POKEMONS';
 export const FILTER_CREATED = 'FILTER_CREATED';
+export const POST_POKE = 'POST_POKE';
 
 const endpoint = 'http://localhost:3001/pokemons';
 const endpointtypes = 'http://localhost:3001/types';
@@ -85,6 +86,28 @@ export function filterCreated(payload){
     return{
         type: 'FILTER_CREATED',
         payload
+    }
+}
+
+export function postPoke(payload){
+    return async function(dispatch){
+        const data = await axios.post(endpoint, payload);
+        
+        return data;
+    }
+}
+
+export function getDetail(id){
+    return async function (dispatch){
+        try {
+            const {data} = await axios(endpoint +'/' + id);
+            return dispatch({
+                type: 'GET_DETAILS',
+                payload: data
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
