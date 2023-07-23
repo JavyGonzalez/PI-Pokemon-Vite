@@ -3,7 +3,7 @@ const initialState = {
     allPokemones: [],
     types: [],
     allTypes: [],
-    detail: []
+    detail: null,
 };
 
 function rootReducer (state = initialState, action){

@@ -19,7 +19,7 @@ export default function padinated ({pokePerPage, allPokemons, paginado}){
                 pageNumbers &&
                 pageNumbers.map(number =>(
                     <ul key={number}>
-                        <button  className={style.page} onClick={() => paginado(number)}>{number}</button>
+                        <button  className={style.btn} onClick={() => paginado(number)}>{number}</button>
                     </ul>
                     )
                 )

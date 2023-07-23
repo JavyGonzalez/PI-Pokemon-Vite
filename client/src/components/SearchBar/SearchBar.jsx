@@ -26,7 +26,7 @@ export default function SearchBar(props) {
       <div className={style.contenedor}>
          <div className={style.barra}>
             <input className={style.input} type='search' value={name} placeholder='Buscar Pokemón...' onChange={(e)=> {handleInputChange(e)}}/>
-            <button className={style.btn} type='submit' onClick={(e)=> handleSubmitByName(e)}> Buscar </button>
+            <button className={style.btn} type='submit' onClick={(e)=> handleSubmitByName(e)}>Buscar</button>
          </div>;
       </div>);
 }

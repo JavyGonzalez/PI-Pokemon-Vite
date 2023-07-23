@@ -6,16 +6,11 @@ import { getPokemons,
     orderPokeByAttack, 
     filterPokemonsByType, 
     getTypes, 
-    filterCreated, 
-    getPokeByName } from "../../redux/actions";
+    filterCreated } from "../../redux/actions";
 //import {Link} from 'react-router-dom';
 import Card from '../Card/Card';
 import Paginated from "../Paginated/Paginated";
 import style from '../Home/Home.module.css';
-import { Link } from "react-router-dom";
-import PathRoutes from "../../helpers/Routes.helper";
-
-
 
 export default function Home (){
 
@@ -27,7 +22,7 @@ export default function Home (){
     const [currentPage, setCurrentPage] = useState(1);
     //Guardame el estado guardame cuantos Pokemones guardo por pagina, en este caso 6.
     const [pokePerPage, setPokePerPage] = useState(12);
-    
+
 
     const [sortPoke, setSortPoke] = useState(false);
     //El índice del ultimo Pokemon por página.
@@ -64,11 +59,6 @@ export default function Home (){
     }
 
 
-    function handleClick(ev){
-        ev.preventDefault();
-        dispatch(getPokemons());
-    }
-
     function handleFilterByType(e){
         dispatch(filterPokemonsByType(e.target.value));
     }
@@ -77,28 +67,24 @@ export default function Home (){
         dispatch(filterCreated(e.target.value))
     }
 
-      
+
     return(
-        <div>
-            <NavBar/>
-            <Link to={PathRoutes.CREATEPOKE}><button>Crear Pokemon</button></Link>            
+        <div  className={style.body}>
+            <NavBar/>     
             <h1>POKEMONES</h1>
-            <button onClick={ev => handleClick(ev)}>
-                Volver a cargar todos los Pokemones
-            </button>
             <div>
                 <select onChange={handleOrderPokeByName}>
-                    <option value=' '>Seleccione una opción...</option>
+                    <option value=' '>Ordenar por nombre...</option>
                     <option value='asc'>Ascendente</option>
                     <option value='desc'>Descendente</option>
                 </select>
                 <select onChange={handleOrderPokeByAttack}>
-                    <option value=' '>Seleccione una opción...</option>
+                    <option value=' '>Ordenar por ataque...</option>
                     <option value='asc'>Ascendente</option>
                     <option value='desc'>Descendente</option>
                 </select>
                 <select onChange={e => handleFilterByType(e)}>
-                    <option value="All">All types</option>
+                    <option value="All">Todos los tipos</option>
                     {
                         types.map( type => (
                             <option value={type.name} key={type.name}>{type.name}</option>
@@ -106,7 +92,7 @@ export default function Home (){
                     }
                 </select>
                 <select onChange={handleFilterCreated}>
-                    <option value='All'>Seleccione una opción...</option>
+                    <option value='All'>Ordenar por origen...</option>
                     <option value='created'>Creados</option>
                     <option value='api'>API</option>
                 </select>
@@ -115,17 +101,22 @@ export default function Home (){
                     allPokemons={allPokemons.length}
                     paginado={paginado}
                 />
-       
-                {currentPoke?.map((p)=>{
-                    return(
-                            <div key={p.id}>
-                                <p to={'/home' + p.id}>
-                                    <Card name={p.name} img={p.img} types={p.types.join(' - ')} />
-                                </p>
-                            </div>
-                        );
-                    })
-                }
+                <div className={style.cardContainer}>
+                    {currentPoke?.map((p)=>{
+                        return(
+                            <>
+                            <Card 
+                                    key={p.id}
+                                    id={p.id}
+                                    name={p.name}
+                                    img={p.img}
+                                    types={p.types.join(' - ')}
+                                />
+                            </>
+                            );
+                        })
+                    }
+                </div>
 
             </div>
         </div>

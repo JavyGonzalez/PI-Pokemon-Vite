@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Pokemon } = require('../db')
-const URL = 'https://pokeapi.co/api/v2/pokemon?limit=150';
+const URL = 'https://pokeapi.co/api/v2/pokemon?limit=120';
 
 const getPoke = async (req, res) => {
     try {
@@ -30,9 +30,9 @@ const getPoke = async (req, res) => {
 
             //Iteramos con map sobre el array de detealles de pokemones
             // y destructuramos las propiedades que deseamos
-            const todosPoke = pokemonDetails.map(({ name, sprites, stats, height, weight, types }) => ({
+            const todosPoke = pokemonDetails.map(({id, name, sprites, stats, height, weight, types }) => ({
+                id,
                 name,
-
                 //Accedemos a la URL de la imagen del pokemon
                 img: sprites.front_default,
 
@@ -70,21 +70,23 @@ const getPoke = async (req, res) => {
                     const pokemonResponse = await axios.get(pokeBuscado.url);
                     const pokemonDetails = pokemonResponse.data;
 
+                   
                     // Combinar los datos del Pokémon encontrado con los detalles adicionales
                     const pokemonData = {
-                    id: pokemonDetails.id,
-                    name: pokemonDetails.name,
-                    img: pokemonDetails.sprites.front_default,
-                    hp: pokemonDetails.stats.find((stat) => stat.stat.name === 'hp').base_stat,
-                    attack: pokemonDetails.stats.find((stat) => stat.stat.name === 'attack').base_stat,
-                    defense: pokemonDetails.stats.find((stat) => stat.stat.name === 'defense').base_stat,
-                    speed: pokemonDetails.stats.find((stat) => stat.stat.name === 'speed')?.base_stat || null,
-                    height: pokemonDetails.height,
-                    weight: pokemonDetails.weight,
-                    types: pokemonDetails.types.map((type) => type.type.name),
+                        id: pokemonDetails.id,
+                        name: pokemonDetails.name,
+                        img: pokemonDetails.sprites.front_default,
+                        hp: pokemonDetails.stats.find((stat) => stat.stat.name === 'hp').base_stat,
+                        attack: pokemonDetails.stats.find((stat) => stat.stat.name === 'attack').base_stat,
+                        defense: pokemonDetails.stats.find((stat) => stat.stat.name === 'defense').base_stat,
+                        speed: pokemonDetails.stats.find((stat) => stat.stat.name === 'speed')?.base_stat || null,
+                        height: pokemonDetails.height,
+                        weight: pokemonDetails.weight,
+                        types: pokemonDetails.types.map((type) => type.type.name),
                     };
+                    
                     res.status(200).json(pokemonData)
-
+                    
                 }else{
                     
                     //Busco el pokemon en la base de datos

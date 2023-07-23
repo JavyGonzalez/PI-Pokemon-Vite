@@ -2,6 +2,7 @@
     display: flex;
     width: auto;
     align-items: center;
+    justify-content:space-around;
     border-radius: 10px;
     background-color: rgb(62, 47, 147);
     box-shadow: 0 0 10px rgb(9, 4, 78), 0 0 40px rgb(23, 5, 124), 0 0 80px rgb(66, 51, 236);
@@ -16,3 +17,30 @@
     height: 90px;
 
 }
+
+  .btn {
+    background-color: white;
+    color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+:hover .btn{
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgb(98, 0, 255), 0 0 40px rgb(98, 0, 255), 0 0 80px rgb(98, 0, 255);
+  }
+
+  ::placeholder{
+    color: grey;
+  
+  }
+   
+  
+  .btn:hover{
+    background: rgb(19, 8, 134);
+    color: #c5f908;
+  }
+  

@@ -24,11 +24,12 @@ const getPokeById = async (req, res) => {
         if (pokeByBd) {
             return res.status(200).json(pokeByBd);
         } else {
+  
             //Hago destructuración de los datos que necesito
-            const { name, sprites, stats, height, weight } = (await axios(URL + '/' + id)).data;
+            const { name, sprites, stats, height, weight, types } = (await axios(URL + '/' + id)).data;
             
             //Esta es la imagen del pokemon
-            const {front_default} = sprites;
+            const front_default = sprites.front_default;
 
             //Obtengo los datos que estan dentro de stat
             let hp, attack, defense, speed;
@@ -52,7 +53,9 @@ const getPokeById = async (req, res) => {
             });
 
             //Guardo el pokemon
-            const pokemon = { id, name, front_default, hp, attack, defense, speed,  height, weight };
+            const pokemon = { id, name, front_default, hp, 
+                            attack, defense, speed,  height, weight,
+                            types: types.map((type) => type.type.name) };
 
             // const crearPokeBd = await Pokemon.create(pokemon);
 

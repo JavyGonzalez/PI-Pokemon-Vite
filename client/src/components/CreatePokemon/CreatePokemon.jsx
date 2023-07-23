@@ -72,7 +72,6 @@ export default function PokeCreated(){
             type: input.type.filter(t => t !== tip)
         })
     }
-    console.log(input);
 
     useEffect(() => {
         dispatch(getTypes());

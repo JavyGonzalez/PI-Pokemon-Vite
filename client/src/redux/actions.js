@@ -9,10 +9,12 @@ export const FILTER_BY_TYPES = 'FILTER_BY_TYPES';
 export const FILTERED_POKEMONS = 'FILTERED_POKEMONS';
 export const FILTER_CREATED = 'FILTER_CREATED';
 export const POST_POKE = 'POST_POKE';
+export const GET_DETAILS = 'GET_DETAILS'
 
-const endpoint = 'http://localhost:3001/pokemons';
+const endpoint = 'http://localhost:3001/pokemons/';
 const endpointtypes = 'http://localhost:3001/types';
 const endpointName = 'http://localhost:3001/pokemons?name=';
+
 
 export function getPokemons(){
 
@@ -20,9 +22,10 @@ export function getPokemons(){
         
         try {
             const {data} = await axios(endpoint);
+            const pokeArray = Array.isArray(data) ? data:[data]
             return dispatch({
                 type: 'GET_POKEMONS',
-                payload: data
+                payload: pokeArray
             })
         } catch (error) {
             console.log(error);
@@ -98,12 +101,13 @@ export function postPoke(payload){
 }
 
 export function getDetail(id){
-    return async function (dispatch){
+    return async function(dispatch){
         try {
-            const {data} = await axios(endpoint +'/' + id);
+            const {data} = await axios.get(endpoint+id)
+
             return dispatch({
                 type: 'GET_DETAILS',
-                payload: data
+                payload: data,
             })
         } catch (error) {
             console.log(error);

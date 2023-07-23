@@ -19,12 +19,27 @@ nav {
   padding: 8px 12px; /* Espaciado interno */
   }
   
-  .page button {
-    background: none;
+  .btn {
+    background-color: white;
+    color: #3f51b5;
     border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
     cursor: pointer;
   }
+
+:hover .btn{
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgb(98, 0, 255), 0 0 40px rgb(98, 0, 255), 0 0 80px rgb(98, 0, 255);
+  }
+
+  ::placeholder{
+    color: grey;
   
-  .page button:hover {
-    background-color: #2d0cbd; /* Color de fondo al pasar el cursor */
+  }
+   
+  .btn:hover{
+    background: rgb(19, 8, 134);
+    color: #c5f908;
   }
