@@ -22,15 +22,15 @@ export default function Detail(){
    
     return(
         <div className={style.container}>
-            <h2 className={style.title}>Este es el Detalle del Pokemon</h2>
+            <h2 className={style.title}>Este es el Detalle del Pokemón</h2>
             { myPoke?
                 <div className={style.pokemonContainer}>
                     <h2>ID: {myPoke.id}</h2>
                     <div className={style.imageContainer}>
-                        <img src={myPoke.front_default? myPoke.front_default :myPoke.img}
+                        <img src={myPoke.front_default ? myPoke.front_default : myPoke.img}
                         alt="Pokemón"
                         className={style.pokemonImage}/>
-                        <h1 className={style.pokemonName}>{myPoke.name}</h1>
+                        <h1 className={style.pokemonName}>{myPoke.name.toUpperCase()}</h1>
                     </div>
                     <div className={style.statsContainer}>
                         <div>
@@ -47,14 +47,14 @@ export default function Detail(){
                         </div>
                     </div>
                     <div className={style.typesConatiner}>
-                        <h2>Tipo: {myPoke.types? myPoke.types.join(' - '): ''}</h2>
+                        <h2>Tipo: {myPoke.types? myPoke.types.join(' - '):myPoke.types}</h2>
                     </div>
                 </div>
                 : <p>Loading...</p>    
             }
 
             <Link to={PathRoutes.HOME}>
-                <button>Volver</button>
+                <button className={style.btn}>Volver</button>
             </Link>
 
         </div>

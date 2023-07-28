@@ -20,7 +20,8 @@ const getPokeById = async (req, res) => {
 
         //Busca el ID en la BD
         const pokeByBd = await Pokemon.findByPk(uuid);
-
+        
+        //Si encuentra el pokemon lo devuelve
         if (pokeByBd) {
             return res.status(200).json(pokeByBd);
         } else {
@@ -50,14 +51,13 @@ const getPokeById = async (req, res) => {
                     default:
                         break;
                 }
+                types
             });
 
             //Guardo el pokemon
             const pokemon = { id, name, front_default, hp, 
                             attack, defense, speed,  height, weight,
                             types: types.map((type) => type.type.name) };
-
-            // const crearPokeBd = await Pokemon.create(pokemon);
 
             return pokemon.name
                 ? res.status(200).json(pokemon)
@@ -68,6 +68,7 @@ const getPokeById = async (req, res) => {
 
         //Buscamos el pokemon en la base de datos por el id
         const pokeByBd = await Pokemon.findByPk(id);
+
 
         if (pokeByBd) {
           return res.status(200).json(pokeByBd);

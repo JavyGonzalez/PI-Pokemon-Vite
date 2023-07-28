@@ -1,32 +1,37 @@
-/* Estilos generales para la card */
+
 .pokemonCard {
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
-  backdrop-filter: blur(10px); /* Borde suavizado con efecto glass */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde blanco semitransparente */
+  background-color: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #e0e0e0; /* Agregar un borde a la card */
-  border-radius: 5px; /* Añadir bordes redondeados */
-  width: calc(20% - 20px); /* Ajustar el tamaño de cada card para que haya 4 columnas */
+  border: 1px solid #e0e0e0;
+  border-radius: 5px; 
+  width: calc(20% - 20px);
   margin: 10px;
   }
   
-  /* Estilos para el nombre del Pokémon */
+
   .pokemonName {
     margin-top: 10px;
   font-size: 20px;
   }
+
+  .pokemonAttack {
+    margin-top: 5px;
+    font-size: 14px;
+  }
   
-  /* Estilos para el tipo del Pokémon */
+  
+
   .pokemonTypes {
     margin-top: 5px;
     font-size: 14px;
   }
   
-  /* Estilos para la imagen del Pokémon */
   .pokemonImg {
     width: 150px;
     height: 150px;

@@ -51,9 +51,10 @@ export function getPokeByName(name){
     return async function(dispatch){
         try {
             const {data} = await axios(endpointName + name)
+            const pokeArray = Array.isArray(data) ? data:[data];
             return dispatch({
                 type: 'GET_POKE_BY_NAME',
-                payload: data
+                payload: pokeArray
             })
         } catch (error) {
             console.log(error);

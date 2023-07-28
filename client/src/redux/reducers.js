@@ -79,13 +79,23 @@ function rootReducer (state = initialState, action){
                 const allPokemones = state.allPokemones;
                 const filteredPokemons = action.payload === "All" 
                 ? allPokemones 
-                :allPokemones.filter(poke => poke.types.includes(action.payload))
+                :allPokemones.filter((poke) => {
+                    if(Number.isInteger(poke.id)){
+                        //Tipos de la API
+                         return poke.types.includes(action.payload);
+                    }else{
+                        //Tipos de la BD
+                        return poke.types.map((type) => type.name);    
+                    }
+                })
+               
                 return {
                     ...state,
                     pokemones: filteredPokemons
                 };
+
             case 'FILTER_CREATED':
-                const createdFilter = action.payload === 'created' 
+                const createdFilter = action.payload === 'api' 
                 ? state.allPokemones.filter(poke => Number.isInteger(poke.id)) 
                 : state.allPokemones.filter(poke => !Number.isInteger(poke.id))
                 return{

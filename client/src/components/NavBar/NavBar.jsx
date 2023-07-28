@@ -15,6 +15,9 @@ export default function Nav (props) {
     const { handleSubmit} = props;
     const dispatch = useDispatch();
 
+
+
+
     function handleClick(ev){
         ev.preventDefault();
         dispatch(getPokemons());

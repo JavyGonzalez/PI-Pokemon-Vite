@@ -15,6 +15,7 @@ export default function Cards(props) {
       key={pokemons.id}
       id={pokemons.id}
       name={pokemons.name}
+      attack={pokemons.attack}
       types={pokemons.types.join(' - ')}
       image={pokemons.img}
 

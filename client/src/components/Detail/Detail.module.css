@@ -6,7 +6,10 @@
   }
   
   .title {
-    margin-top: 20px;
+    color: #f2cf06;
+     padding: 5px 10px;
+    text-align: center;
+      margin-top: 20px; 
   }
   
   .pokemonContainer {
@@ -55,3 +58,28 @@
     margin-top: 20px;
   }
   
+  .btn {
+    background-color: white;
+    color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+:hover .btn{
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgb(98, 0, 255), 0 0 40px rgb(98, 0, 255), 0 0 80px rgb(98, 0, 255);
+  }
+
+  ::placeholder{
+    color: grey;
+  
+  }
+   
+  
+  .btn:hover{
+    background: rgb(19, 8, 134);
+    color: #c5f908;
+  }

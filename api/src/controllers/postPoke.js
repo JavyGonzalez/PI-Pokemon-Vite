@@ -37,9 +37,9 @@ const postPoke = async (req, res) =>{
             weight: req.body.weight,
         });
 
-      
-
+        //Guardo el tipo de pokemon encontrado en la BD
          const pokeType = await Type.findAll({where: {name: {[Op.in]:type}}})
+         
          if(!pokeType || pokeType.length === 0) return res.status(400).json({ info: 'Seleccione un tipo de pokemón válido' });
 
          await nuevoPokemon.addType(pokeType);

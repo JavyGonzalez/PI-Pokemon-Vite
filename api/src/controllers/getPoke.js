@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Pokemon } = require('../db')
+const { Pokemon, Type } = require('../db')
 const URL = 'https://pokeapi.co/api/v2/pokemon?limit=120';
 
 const getPoke = async (req, res) => {
@@ -9,6 +9,7 @@ const getPoke = async (req, res) => {
 
         //Pregunto si NO hay query
         if (!name) {
+
 
             //Realizo la solicitud a la API y guardamos en response
             const response = await axios.get(URL);
@@ -46,8 +47,13 @@ const getPoke = async (req, res) => {
                 types: types.map(type => type.type.name)
             }));
 
+            //Pido los pokemones de la BD con el tipo incluido
+           const dbPokemons = await Pokemon.findAll({include: [Type]});
+            
+           //Devuelvo los pokemones de la API junto a los de la BD
+            const allPokemons = [...todosPoke, ...dbPokemons];
             //Retornamos todos los pokemones con sus detalles
-            return res.status(200).json(todosPoke);
+            return res.status(200).json(allPokemons);
 
         } else {
 
@@ -66,8 +72,9 @@ const getPoke = async (req, res) => {
 
                 //Pregunto si encontró el pokemon
                 if(pokeBuscado){
-
+                     //Gardo la info que se encuentra en la url obtenida
                     const pokemonResponse = await axios.get(pokeBuscado.url);
+                    //Guardo los detalles de los pokemones
                     const pokemonDetails = pokemonResponse.data;
 
                    
@@ -90,7 +97,9 @@ const getPoke = async (req, res) => {
                 }else{
                     
                     //Busco el pokemon en la base de datos
-                    const pokeNameBd = await Pokemon.findOne({where: {name}});
+                    const pokeNameBd = await Pokemon.findOne({where: {name},include: [Type]});
+
+                    //Pregunto si existe el pokemon en la BD
                     if(pokeNameBd){
                         
                         //Devuelvo el nombre

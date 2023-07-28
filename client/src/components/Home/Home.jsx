@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import NavBar from '../NavBar/NavBar'
+//import NavBar from '../NavBar/NavBar'
 import { getPokemons, 
     orderPokeByName, 
     orderPokeByAttack, 
@@ -23,7 +23,7 @@ export default function Home (){
     //Guardame el estado guardame cuantos Pokemones guardo por pagina, en este caso 6.
     const [pokePerPage, setPokePerPage] = useState(12);
 
-
+    //Guarda el estado de ordenamiento en false
     const [sortPoke, setSortPoke] = useState(false);
     //El índice del ultimo Pokemon por página.
     const indexOfLastPokemon = currentPage * pokePerPage;
@@ -35,9 +35,8 @@ export default function Home (){
    ? allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) 
    :[allPokemons];
 
-    const types = useSelector(state => state.types)
-    
-    
+    const types = useSelector(state => state.types)    
+
     useEffect(()=>{
         dispatch(getTypes());
         dispatch(getPokemons()); //Igual que hacer mapDispatchToProps
@@ -61,37 +60,42 @@ export default function Home (){
 
     function handleFilterByType(e){
         dispatch(filterPokemonsByType(e.target.value));
+        setCurrentPage(1);
+        setSortPoke(!sortPoke);
     }
 
     function handleFilterCreated(e){
         dispatch(filterCreated(e.target.value))
+        setCurrentPage(1);     
     }
 
+    
 
     return(
+        
         <div  className={style.body}>
-            <NavBar/>     
-            <h1>POKEMONES</h1>
+                 
+            <h1 className={style.title}>POKEMONES</h1>
             <div>
                 <select onChange={handleOrderPokeByName}>
-                    <option value=' '>Ordenar por nombre...</option>
+                    <option value='All'>Ordenar por nombre...</option>
                     <option value='asc'>Ascendente</option>
                     <option value='desc'>Descendente</option>
                 </select>
                 <select onChange={handleOrderPokeByAttack}>
-                    <option value=' '>Ordenar por ataque...</option>
+                    <option value='All'>Ordenar por ataque...</option>
                     <option value='asc'>Ascendente</option>
                     <option value='desc'>Descendente</option>
                 </select>
                 <select onChange={e => handleFilterByType(e)}>
                     <option value="All">Todos los tipos</option>
-                    {
+                       {
                         types.map( type => (
                             <option value={type.name} key={type.name}>{type.name}</option>
                         ))
                     }
                 </select>
-                <select onChange={handleFilterCreated}>
+                <select onChange={handleFilterCreated} value={filterCreated}>
                     <option value='All'>Ordenar por origen...</option>
                     <option value='created'>Creados</option>
                     <option value='api'>API</option>
@@ -108,9 +112,17 @@ export default function Home (){
                             <Card 
                                     key={p.id}
                                     id={p.id}
-                                    name={p.name}
+                                    name={p.name.toUpperCase()}
+                                    attack={p.attack}
                                     img={p.img}
-                                    types={p.types.join(' - ')}
+                                    types={Array.isArray(p.types) && p.types[0].name ? (
+                                        // Si p.types es un arreglo de objetos (viene de la base de datos)
+                                        <p>{p.types.map(type => type.name).join(' - ')}</p>
+                                      ) : (
+                                        // Si p.types es un arreglo de cadenas (viene de la API)
+                                        <p>{p.types.join(' - ')}</p>
+                                      )}
+                                    
                                 />
                             </>
                             );

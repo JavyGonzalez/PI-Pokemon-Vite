@@ -1,0 +1,81 @@
+
+.error {
+    color: #f01212;
+  }
+
+  .title {
+    color: #f2cf06;
+     padding: 5px 10px;
+    text-align: center;
+      margin-top: 20px; 
+  }
+
+  .btn {
+    background-color: white;
+    color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  :hover .btn{
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgb(98, 0, 255), 0 0 40px rgb(98, 0, 255), 0 0 80px rgb(98, 0, 255);
+  }
+
+  ::placeholder{
+    color: grey;
+  
+  }
+   
+  
+  .btn:hover{
+    background: rgb(19, 8, 134);
+    color: #c5f908;
+  }
+
+  .btnCrear {
+    background-color: white;
+    color: #3f51b5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  :hover .btnCrear{
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgb(98, 0, 255), 0 0 40px rgb(98, 0, 255), 0 0 80px rgb(98, 0, 255);
+  }
+
+  ::placeholder{
+    color: grey;
+  
+  }
+   
+  .btnCrear:hover{
+    background: rgb(19, 8, 134);
+    color: #c5f908;
+  }
+
+  /* Estilos para el contenedor principal que muestra los divs horizontalmente */
+.container-tipos {
+  display: flex;
+  flex-wrap: wrap; /* Ajustar automáticamente los divs en varias filas si es necesario */
+  justify-content: center; /* Centrar los divs horizontalmente */
+}
+
+/* Estilos para cada div individual */
+.divTipo {
+  /* Agrega los estilos deseados para cada div */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  margin-right: 5px;
+}
+
+

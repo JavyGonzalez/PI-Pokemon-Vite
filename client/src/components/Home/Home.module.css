@@ -5,6 +5,13 @@ body {
   background-position: center center;
 }
 
+.title {
+  color: #f2cf06;
+   padding: 5px 10px;
+  text-align: center;
+    margin-top: 20px; 
+}
+
 .contenedor {
     display: flex;
     justify-content: center;
@@ -51,4 +58,6 @@ body {
     padding: 10px;
     border-radius: 5px;
   }
+
+  
   

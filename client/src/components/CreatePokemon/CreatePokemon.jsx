@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 //import siluetaPoke from '../Image/Silueta.png';
 import PathRoutes from '../../helpers/Routes.helper';
 import validate from './Validations';
+import style from '../CreatePokemon/CreatePokemon.module.css';
 
 
 export default function PokeCreated(){
@@ -47,24 +48,24 @@ export default function PokeCreated(){
         })
     }
 
-
+ console.log(Object.keys(errorInput));
     function handleSubmit(ev){
         ev.preventDefault();
-        dispatch(postPoke(input));
-        alert('Pokemón creado!!!')
-        setInput({
-            "name": '',
-            "hp": '',
-            "attack": '',
-            "defense": '',
-            "speed": '',
-            "height": '',
-            "weight": '',
-            "img": '',
-            "type": []
-        })
-        history('/home')
-    }
+            dispatch(postPoke(input));
+            alert('Pokemón creado!!!')
+            setInput({
+                "name": '',
+                "hp": '',
+                "attack": '',
+                "defense": '',
+                "speed": '',
+                "height": '',
+                "weight": '',
+                "img": '',
+                "type": []
+            })
+            history('/home')
+        }
 
     function handleDelte(tip){
         setInput({
@@ -79,20 +80,22 @@ export default function PokeCreated(){
 
     return(
         <div>
-            <Link to={PathRoutes.HOME}><button>Vovler</button></Link>
-            <h1>Creá tu Pokemón</h1>
+            <Link to={PathRoutes.HOME}><button className={style.btn}>Vovler</button></Link>
+            <h1 className={style.title}>Creá tu Pokemón</h1>
             <form onSubmit={(ev) => handleSubmit(ev)}>
+                <div className={style.pokemonCard}>
+
                 <div>
                     <label>Nombre: </label>
                     <input type='text' value={input.name}
                     name= 'name'
                     onChange={handleChange}/>
                     {errorInput.name1 ? (
-                        <p>{errorInput.name1}</p>
+                        <p className={style.error}>{errorInput.name1}</p>
                         ) : errorInput.name2 ? (
-                        <p>{errorInput.name2}</p>
-                        ) : (
-                        <p>{errorInput.name3}</p>
+                            <p className={style.error}>{errorInput.name2}</p>
+                            ) : (
+                                <p className={style.error}>{errorInput.name3}</p>
                         )}
                 </div>
                 <div>
@@ -101,10 +104,10 @@ export default function PokeCreated(){
                     name= 'hp'
                     onChange={handleChange}/>
                      {errorInput.hp1 ? (
-                        <p>{errorInput.hp1}</p>
+                         <p className={style.error}>{errorInput.hp1}</p>
                         ) :(
-                        <p>{errorInput.hp2}</p>
-                        )}
+                            <p className={style.error}>{errorInput.hp2}</p>
+                            )}
                 </div>
                 <div>
                     <label>Ataque: </label>
@@ -112,10 +115,10 @@ export default function PokeCreated(){
                     name= 'attack'
                     onChange={handleChange}/>
                     {errorInput.attack1 ? (
-                        <p>{errorInput.attack1}</p>
+                        <p className={style.error}>{errorInput.attack1}</p>
                         ) :(
-                        <p>{errorInput.attack2}</p>
-                        )}
+                            <p className={style.error}>{errorInput.attack2}</p>
+                            )}
                 </div>
                 <div>
                     <label>Defensa: </label>
@@ -123,10 +126,10 @@ export default function PokeCreated(){
                     name= 'defense'
                     onChange={handleChange}/>
                     {errorInput.defense1 ? (
-                        <p>{errorInput.defense1}</p>
+                        <p className={style.error}>{errorInput.defense1}</p>
                         ) :(
-                        <p>{errorInput.defense2}</p>
-                        )}
+                            <p className={style.error}>{errorInput.defense2}</p>
+                            )}
                 </div>
                 <div>
                     <label>Velocidad: </label>
@@ -134,10 +137,10 @@ export default function PokeCreated(){
                     name= 'speed'
                     onChange={handleChange}/>
                     {errorInput.speed1 ? (
-                        <p>{errorInput.speed1}</p>
+                        <p className={style.error}>{errorInput.speed1}</p>
                         ) :(
-                        <p>{errorInput.speed2}</p>
-                        )}
+                            <p className={style.error}>{errorInput.speed2}</p>
+                            )}
                 </div>
                 <div>
                     <label>Altura: </label>
@@ -145,10 +148,10 @@ export default function PokeCreated(){
                     name= 'height'
                     onChange={handleChange}/>
                     {errorInput.height1 ? (
-                        <p>{errorInput.height1}</p>
+                        <p className={style.error}>{errorInput.height1}</p>
                         ) :(
-                        <p>{errorInput.height2}</p>
-                        )}
+                            <p className={style.error}>{errorInput.height2}</p>
+                            )}
                 </div>
                 <div>
                     <label>Peso: </label>
@@ -156,9 +159,9 @@ export default function PokeCreated(){
                     name= 'weight'
                     onChange={handleChange}/>
                     {errorInput.weight1 ? (
-                        <p>{errorInput.weight1}</p>
+                        <p className={style.error}>{errorInput.weight1}</p>
                         ) :(
-                        <p>{errorInput.weight2}</p>
+                        <p className={style.error}>{errorInput.weight2}</p>
                         )}
                 </div>
                 <div>
@@ -167,34 +170,41 @@ export default function PokeCreated(){
                     name= 'img'
                     onChange={handleChange}/>
                      {errorInput.img1 ? (
-                        <p>{errorInput.img1}</p>
-                        ) :(
-                        <p>{errorInput.img2}</p>
-                        )}
+                         <p className={style.error}>{errorInput.img1}</p>
+                         ) :(
+                             <p className={style.error}>{errorInput.img2}</p>
+                             )}
                 </div>
                 <label>Tipos: </label>
                 <select onChange={handleSelect}>
                     {tipos.map((types)=> {
                         return(
                             <option value={(types.name)}>{types.name}</option>
-                        )
-                    })}
+                            )
+                        })}
                      {errorInput.type1 ? (
-                        <p>{errorInput.type1}</p>
-                        ) :(
-                        <p>{errorInput.type2}</p>
-                        )}
+                         <p className={style.error}>{errorInput.type1}</p>
+                         ) :(
+                             <p className={style.error}>{errorInput.type2}</p>
+                             )}
                 </select>
-                <br></br>
-                <br></br>
-                <button className='btnCrear'onSubmit={handleSubmit}>Crear Pokemón</button>
+                <br/>
+                <br/>
+                <br/>
+                <button className={style.btnCrear} onSubmit={handleSubmit}>Crear Pokemón</button>
+            </div>
+                
             </form>
-            {input.type.map((tip) => 
-                    <div className='divTipo'>
-                            <p>{tip}</p>
-                            <button className='botonX' onClick={()=> handleDelte(tip)}>x</button>
-                        </div>
-                    )}
+            {input.type.map((tip) =>
+                <div className={style.container-tipos}>
+
+                <div className={style.divTipo}>
+                        <p>{tip}</p>
+                        <button className='botonX' onClick={()=> handleDelte(tip)}>x</button>
+                </div>
+                </div> 
+            )}
+                    
         </div>
     )
 }
