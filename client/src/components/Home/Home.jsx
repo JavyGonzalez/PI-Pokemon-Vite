@@ -20,56 +20,58 @@ export default function Home (){
     //Guardar el estado de la pagina actual y setear el estado de la pagina actual.
     //El useState(1) es porque siempre voy a comenzar en la pagina 1
     const [currentPage, setCurrentPage] = useState(1);
-    //Guardame el estado guardame cuantos Pokemones guardo por pagina, en este caso 6.
-    const [pokePerPage, setPokePerPage] = useState(12);
+    
+    const [sortPoke, setSortPoke] = useState([]);
+    const [pokeLoaded, setPokeLoaded] = useState(allPokemons.length ? true : false);
 
-    //Guarda el estado de ordenamiento en false
-    const [sortPoke, setSortPoke] = useState(false);
+    //Guardame el estado guardame cuantos Pokemones guardo por pagina, en este caso 6.
+    const [pokePerPage, setPokePerPage] = useState(12);   
     //El índice del ultimo Pokemon por página.
     const indexOfLastPokemon = currentPage * pokePerPage;
     //El índice del primer Pokemon por página
     const indexOfFirstPokemon = indexOfLastPokemon - pokePerPage;
     //Se va guardando los poekemones por pagina
-   // const currentPoke = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
    const currentPoke = Array.isArray(allPokemons) 
    ? allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon) 
    :[allPokemons];
 
-    const types = useSelector(state => state.types)    
+    const types = useSelector(state => state.types)
+    
 
     useEffect(()=>{
         dispatch(getTypes());
-        dispatch(getPokemons()); //Igual que hacer mapDispatchToProps
-
-    }, [dispatch])//Si no funciona borrar dispatch del arreglo
+        if(!pokeLoaded){
+            dispatch(getPokemons()); //Igual que hacer mapDispatchToProps
+        }
+    }, [pokeLoaded, dispatch])
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
 
+   
     const handleOrderPokeByName = (ev)=>{
         dispatch(orderPokeByName(ev.target.value));
-        setSortPoke(!sortPoke);
+        setSortPoke([...sortPoke, ev.target.value]);
     }
 
     const handleOrderPokeByAttack = (ev)=>{
         dispatch(orderPokeByAttack(ev.target.value));
-        setSortPoke(!sortPoke);
+        setSortPoke([...sortPoke, ev.target.value]);
     }
 
 
-    function handleFilterByType(e){
-        dispatch(filterPokemonsByType(e.target.value));
+    function handleFilterByType(ev){
+        dispatch(filterPokemonsByType(ev.target.value));
         setCurrentPage(1);
-        setSortPoke(!sortPoke);
+        setSortPoke([...sortPoke, ev.target.value]);
     }
 
-    function handleFilterCreated(e){
-        dispatch(filterCreated(e.target.value))
-        setCurrentPage(1);     
-    }
-
-    
+    function handleFilterCreated(ev){
+        dispatch(filterCreated(ev.target.value))
+        setCurrentPage(1); 
+        setSortPoke([...sortPoke, ev.target.value]);    
+    } 
 
     return(
         

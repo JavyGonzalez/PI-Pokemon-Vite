@@ -6,8 +6,6 @@
 
     export default function Card ({id, name, img, types, attack}){
 
-        console.log(id , types, name);
-
         return(
             
                 <div  className={style.pokemonCard}>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getTypes, postPoke } from '../../redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
-//import siluetaPoke from '../Image/Silueta.png';
 import PathRoutes from '../../helpers/Routes.helper';
 import validate from './Validations';
 import style from '../CreatePokemon/CreatePokemon.module.css';
@@ -48,23 +47,30 @@ export default function PokeCreated(){
         })
     }
 
- console.log(Object.keys(errorInput));
     function handleSubmit(ev){
         ev.preventDefault();
+    
+        if(Object.keys(errorInput).length > 0){
+            alert(
+                "Por favor, corrige los siguientes errores:\n" + JSON.stringify(errorInput)
+              );
+
+            }else{
             dispatch(postPoke(input));
             alert('Pokemón creado!!!')
             setInput({
-                "name": '',
-                "hp": '',
-                "attack": '',
-                "defense": '',
-                "speed": '',
-                "height": '',
-                "weight": '',
-                "img": '',
-                "type": []
+                name: '',
+                hp: '',
+                attack: '',
+                defense: '',
+                speed: '',
+                height: '',
+                weight: '',
+                img: '',
+                type: []
             })
             history('/home')
+            }
         }
 
     function handleDelte(tip){
@@ -82,7 +88,7 @@ export default function PokeCreated(){
         <div>
             <Link to={PathRoutes.HOME}><button className={style.btn}>Vovler</button></Link>
             <h1 className={style.title}>Creá tu Pokemón</h1>
-            <form onSubmit={(ev) => handleSubmit(ev)}>
+            <form className={style.form} onSubmit={(ev) => handleSubmit(ev)}>
                 <div className={style.pokemonCard}>
 
                 <div>
@@ -179,31 +185,30 @@ export default function PokeCreated(){
                 <select onChange={handleSelect}>
                     {tipos.map((types)=> {
                         return(
-                            <option value={(types.name)}>{types.name}</option>
+                            <option key={types} value={(types.name)}>{types.name}</option>                  
                             )
                         })}
-                     {errorInput.type1 ? (
-                         <p className={style.error}>{errorInput.type1}</p>
-                         ) :(
-                             <p className={style.error}>{errorInput.type2}</p>
-                             )}
                 </select>
-                <br/>
+                    {input.type.map((tip) =>(
+                        <div className={style.container-tipos}>
+
+                        <div className={style.divTipo}>
+                                <p>{tip}</p>
+                                <button className='botonX' onClick={()=> handleDelte(tip)}>x</button>
+                        </div>
+                        </div> 
+                    ))}
+                    {errorInput.type1 ? (
+                        <p className={style.error}>{errorInput.type1}</p>
+                        ) :(
+                            <p className={style.error}>{errorInput.type2}</p>
+                            )}
                 <br/>
                 <br/>
                 <button className={style.btnCrear} onSubmit={handleSubmit}>Crear Pokemón</button>
             </div>
                 
             </form>
-            {input.type.map((tip) =>
-                <div className={style.container-tipos}>
-
-                <div className={style.divTipo}>
-                        <p>{tip}</p>
-                        <button className='botonX' onClick={()=> handleDelte(tip)}>x</button>
-                </div>
-                </div> 
-            )}
                     
         </div>
     )

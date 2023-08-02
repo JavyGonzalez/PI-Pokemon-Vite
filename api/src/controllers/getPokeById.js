@@ -20,10 +20,11 @@ const getPokeById = async (req, res) => {
 
         //Busca el ID en la BD
         const pokeByBd = await Pokemon.findByPk(uuid);
-        
+    
         //Si encuentra el pokemon lo devuelve
         if (pokeByBd) {
-            return res.status(200).json(pokeByBd);
+      
+            return res.status(200).json(pokeIdBd);
         } else {
   
             //Hago destructuración de los datos que necesito
@@ -54,7 +55,7 @@ const getPokeById = async (req, res) => {
                 types
             });
 
-            //Guardo el pokemon
+            //Guardo el pokemon de la API para mostrar
             const pokemon = { id, name, front_default, hp, 
                             attack, defense, speed,  height, weight,
                             types: types.map((type) => type.type.name) };
@@ -66,10 +67,9 @@ const getPokeById = async (req, res) => {
         }
     }else{
 
-        //Buscamos el pokemon en la base de datos por el id
-        const pokeByBd = await Pokemon.findByPk(id);
-
-
+        //Buscamos el pokemon en la base de datos por el id y agregamos los tipos
+        const pokeByBd = await Pokemon.findByPk(id, {include: 'types'});
+        
         if (pokeByBd) {
           return res.status(200).json(pokeByBd);
         } else {
