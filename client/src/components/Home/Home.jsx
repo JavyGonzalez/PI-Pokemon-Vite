@@ -60,6 +60,11 @@ export default function Home (){
         setSortPoke([...sortPoke, ev.target.value]);
     }
 
+    const handleOrderPokeByAttackMasSesenta = (ev) => {
+
+        
+    }
+
 
     function handleFilterByType(ev){
         dispatch(filterPokemonsByType(ev.target.value));
@@ -88,6 +93,11 @@ export default function Home (){
                     <option value='All'>Ordenar por ataque...</option>
                     <option value='asc'>Ascendente</option>
                     <option value='desc'>Descendente</option>
+                </select>
+                    <option value='All'>Ordenar por ataque mayor que...</option>
+                    <option value='60'>Mayor que 60</option>
+                <select>
+
                 </select>
                 <select onChange={e => handleFilterByType(e)}>
                     <option value="All">Todos los tipos</option>

@@ -10,6 +10,7 @@ export const FILTERED_POKEMONS = 'FILTERED_POKEMONS';
 export const FILTER_CREATED = 'FILTER_CREATED';
 export const POST_POKE = 'POST_POKE';
 export const GET_DETAILS = 'GET_DETAILS'
+export const ORDER_POKE_BY_ATTACK_MAS_SESENTA = 'ORDER_POKE_BY_ATTACK_MAS_SESENTA'
 
 const endpoint = 'http://localhost:3001/pokemons/';
 const endpointtypes = 'http://localhost:3001/types';
@@ -44,6 +45,13 @@ export function orderPokeByAttack(order){
     return{
         type: 'ORDER_POKE_BY_ATTACK',
         payload: order
+    }
+}
+
+export function OrderPokeByAttackMasSesenta(attack){
+    return{
+        type: 'ORDER_POKE_BY_ATTACK_MAS_SESENTA',
+        payload: attack
     }
 }
 

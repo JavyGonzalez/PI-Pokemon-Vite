@@ -64,6 +64,11 @@ function rootReducer (state = initialState, action){
                     ...state,
                     pokemones: allPokeAttack
                 }
+            case 'ORDER_POKE_BY_ATTACK_MAS_SESENTA':
+                let allPokeAttackMasSesenta = action.payload === ''    
+            return{
+                    
+                }
             case 'GET_POKE_BY_NAME':
                 return{
                     ...state,
